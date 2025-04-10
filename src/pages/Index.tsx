@@ -1,11 +1,26 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import Navbar from "@/components/landing/navbar";
+import Hero from "@/components/landing/hero";
+import About from "@/components/landing/about";
+import Stats from "@/components/landing/stats";
+import Features from "@/components/landing/features";
+import Testimonials from "@/components/landing/testimonials";
+import Contact from "@/components/landing/contact";
+import Footer from "@/components/landing/footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="flex flex-col min-h-screen overflow-hidden">
+      <Navbar />
+      
+      <div className="pt-16"> {/* Add padding for the navbar */}
+        <Hero />
+        <About />
+        <Stats />
+        <Features />
+        <Testimonials />
+        <Contact />
+        <Footer />
       </div>
     </div>
   );
