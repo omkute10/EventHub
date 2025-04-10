@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/dashboard/header";
 import EventCard from "@/components/dashboard/event-card";
@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Search, CalendarDays, Users, Users2 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-// Mock data
+// Mock data with non-readonly types
 const mockEvents = [
   {
     id: 1,
@@ -90,7 +90,7 @@ const mockEvents = [
     facilities: [],
     termsAndConditions: "Photos must be original and taken within the last 6 months. Maximum 3 submissions per person."
   }
-] as const;
+];
 
 const buddies = [
   {
@@ -123,7 +123,15 @@ const buddies = [
   }
 ];
 
-const calendarEvents = [
+interface CalendarEvent {
+  id: number;
+  title: string;
+  date: Date;
+  category: string;
+  registered: boolean;
+}
+
+const calendarEvents: CalendarEvent[] = [
   {
     id: 1,
     title: "Campus Hackathon 2025",
@@ -166,7 +174,7 @@ const calendarEvents = [
     category: "workshops",
     registered: false
   }
-] as const;
+];
 
 const AttendeeDashboard = () => {
   const navigate = useNavigate();
@@ -289,8 +297,11 @@ const AttendeeDashboard = () => {
           <TabsContent value="events" className="mt-6">
             {filteredEvents.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredEvents.map(event => (
-                  <EventCard key={event.id} {...event} />
+                {filteredEvents.map((event) => (
+                  <EventCard 
+                    key={event.id} 
+                    {...event} 
+                  />
                 ))}
               </div>
             ) : (
