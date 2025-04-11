@@ -63,17 +63,34 @@ const EventCard = ({
   const [expanded, setExpanded] = useState(false);
   const [registered, setRegistered] = useState(false);
   const [showEPass, setShowEPass] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
 
   const handleRegister = () => {
+    if (fee === 0) {
+      // For free events, show E-Pass directly
+      setRegistered(true);
+      setShowEPass(true);
+      toast({
+        title: `Registered for ${title}!`,
+        description: "Your E-Pass is ready. Click on the Register button to view it.",
+      });
+    } else {
+      // For paid events, show payment dialog
+      setShowPayment(true);
+    }
+  };
+
+  const handlePaymentComplete = () => {
+    setShowPayment(false);
     setRegistered(true);
     setShowEPass(true);
     toast({
-      title: `Registered for ${title}!`,
-      description: "Your E-Pass is ready. Click on the Register button to view it.",
+      title: "Payment Successful!",
+      description: "Your E-Pass is now ready.",
     });
   };
 
@@ -202,6 +219,41 @@ const EventCard = ({
         </div>
       </div>
 
+      {/* Payment Dialog */}
+      <Dialog open={showPayment} onOpenChange={setShowPayment}>
+        <DialogContent className="bg-card border-white/10 text-white max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center">
+              <DollarSign className="h-5 w-5 mr-2" />
+              Payment for {title}
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="flex flex-col items-center py-6">
+            <div className="bg-white p-4 rounded-lg mb-6">
+              <QRCodeSVG 
+                value={`payment-${id}-${title}-${fee}`} 
+                size={200} 
+                level="H"
+                includeMargin={true}
+              />
+            </div>
+            
+            <p className="text-center mb-4">
+              Scan this QR code to pay ${fee} and get access to your E-Pass
+            </p>
+
+            {/* In a real app, this would be connected to a payment gateway */}
+            <Button
+              onClick={handlePaymentComplete}
+              className="bg-primary hover:bg-primary/80"
+            >
+              Simulate Payment
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       {/* E-Pass Dialog */}
       <Dialog open={showEPass} onOpenChange={setShowEPass}>
         <DialogContent className="bg-card border-white/10 text-white max-w-md">
@@ -247,26 +299,15 @@ const EventCard = ({
                 <span className="ml-2">{fee === 0 ? "Free" : `$${fee}`}</span>
               </div>
             </div>
-          </div>
-          
-          <DialogFooter>
-            <Button 
-              variant="outline" 
-              size="sm" 
-              onClick={() => setShowEPass(false)}
-            >
-              Close
-            </Button>
-            <Button 
-              variant="default"
-              size="sm"
+
+            <Button
               onClick={handleDownloadEPass}
-              className="bg-primary hover:bg-primary/90"
+              className="bg-primary hover:bg-primary/80"
             >
               <Download className="h-4 w-4 mr-2" />
               Download E-Pass
             </Button>
-          </DialogFooter>
+          </div>
         </DialogContent>
       </Dialog>
     </>
