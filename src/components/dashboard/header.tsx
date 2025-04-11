@@ -201,6 +201,38 @@ const Header = ({ userType }: HeaderProps) => {
             </div>
           )}
           
+          {/* Profile Button */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                className="relative text-white/70 hover:text-white hover:bg-white/5"
+              >
+                <User className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56 bg-card border-white/10">
+              <DropdownMenuLabel className="text-white/70">My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator className="bg-white/10" />
+              <DropdownMenuItem 
+                className="text-white/70 hover:text-white hover:bg-white/5 cursor-pointer"
+                onClick={() => navigate("/profile")}
+              >
+                <User className="h-4 w-4 mr-2" />
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem 
+                className="text-white/70 hover:text-white hover:bg-white/5 cursor-pointer"
+                onClick={handleLogout}
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          
+          {/* Notifications Button */}
           <div className="relative">
             <Button 
               variant="ghost" 
@@ -254,44 +286,6 @@ const Header = ({ userType }: HeaderProps) => {
               </div>
             )}
           </div>
-          
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                <Avatar className="h-8 w-8">
-                  <AvatarImage src="" alt={userName} />
-                  <AvatarFallback className="bg-primary/20 text-primary">
-                    {userName
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </AvatarFallback>
-                </Avatar>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent 
-              align="end" 
-              className="w-56 bg-card border-white/10"
-            >
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator className="bg-white/10" />
-              <DropdownMenuItem
-                className="cursor-pointer flex items-center"
-                onClick={() => navigate("/profile")}
-              >
-                <User className="mr-2 h-4 w-4" />
-                Profile
-              </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-white/10" />
-              <DropdownMenuItem 
-                className="cursor-pointer text-destructive focus:text-destructive flex items-center"
-                onClick={handleLogout}
-              >
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
         </div>
       </div>
 
