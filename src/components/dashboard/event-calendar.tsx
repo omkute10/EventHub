@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
@@ -94,7 +93,7 @@ const EventCalendar = ({ events }: EventCalendarProps) => {
                 
                 return (
                   <div className="relative w-full h-full flex items-center justify-center">
-                    <div>{props.day}</div>
+                    <div className="text-white">{day.getDate()}</div>
                     {hasEvent && (
                       <div className="absolute bottom-1 flex space-x-1 justify-center">
                         {categories.map((category, i) => (

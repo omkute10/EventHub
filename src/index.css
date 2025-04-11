@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -83,6 +82,34 @@
   .gradient-border {
     @apply relative before:absolute before:inset-0 before:p-[1px] before:bg-gradient-to-r before:from-primary before:to-secondary before:rounded-[inherit] before:-z-10;
   }
+  
+  .calendar-dark {
+    @apply text-white;
+  }
+  
+  .calendar-dark .rdp-button {
+    @apply text-white;
+  }
+  
+  .calendar-dark .rdp-day {
+    @apply text-white;
+  }
+  
+  .calendar-dark .rdp-day_selected {
+    @apply bg-primary text-white;
+  }
+  
+  .calendar-dark .rdp-day_today {
+    @apply bg-accent/30 text-white ring-1 ring-accent;
+  }
+  
+  .calendar-dark .rdp-day_outside {
+    @apply text-white/40;
+  }
+  
+  .calendar-dark .rdp-day_disabled {
+    @apply text-white/30;
+  }
 }
 
 @keyframes float {
@@ -115,6 +142,17 @@
   }
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer utilities {
   .animate-float {
     animation: float 3s ease-in-out infinite;
@@ -126,6 +164,10 @@
   
   .animate-glow {
     animation: glow 2s ease-in-out infinite;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
   }
   
   .hover-scale {

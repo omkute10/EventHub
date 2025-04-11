@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/dashboard/header";
@@ -243,35 +242,35 @@ const AttendeeDashboard = () => {
               <select 
                 value={categoryFilter || ''} 
                 onChange={(e) => setCategoryFilter(e.target.value || null)}
-                className="bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white/80 focus:outline-none focus:ring-1 focus:ring-primary"
+                className="bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary"
               >
-                <option value="">All Categories</option>
-                <option value="sports">Sports</option>
-                <option value="hackathons">Hackathons</option>
-                <option value="networking">Networking</option>
-                <option value="speakers">Speaker Sessions</option>
-                <option value="workshops">Workshops</option>
+                <option value="" className="bg-background text-white">All Categories</option>
+                <option value="sports" className="bg-background text-white">Sports</option>
+                <option value="hackathons" className="bg-background text-white">Hackathons</option>
+                <option value="networking" className="bg-background text-white">Networking</option>
+                <option value="speakers" className="bg-background text-white">Speaker Sessions</option>
+                <option value="workshops" className="bg-background text-white">Workshops</option>
               </select>
               
               <select 
                 value={dateFilter || ''} 
                 onChange={(e) => setDateFilter(e.target.value || null)}
-                className="bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white/80 focus:outline-none focus:ring-1 focus:ring-primary"
+                className="bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary"
               >
-                <option value="">All Dates</option>
-                <option value="today">Today</option>
-                <option value="this-week">This Week</option>
-                <option value="next-week">Next Week</option>
+                <option value="" className="bg-background text-white">All Dates</option>
+                <option value="today" className="bg-background text-white">Today</option>
+                <option value="this-week" className="bg-background text-white">This Week</option>
+                <option value="next-week" className="bg-background text-white">Next Week</option>
               </select>
               
               <select 
                 value={feeFilter || ''} 
                 onChange={(e) => setFeeFilter(e.target.value || null)}
-                className="bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white/80 focus:outline-none focus:ring-1 focus:ring-primary"
+                className="bg-white/5 border border-white/10 rounded-md px-3 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary"
               >
-                <option value="">Any Price</option>
-                <option value="free">Free</option>
-                <option value="paid">Paid</option>
+                <option value="" className="bg-background text-white">Any Price</option>
+                <option value="free" className="bg-background text-white">Free</option>
+                <option value="paid" className="bg-background text-white">Paid</option>
               </select>
             </div>
           </div>
