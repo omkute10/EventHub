@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL")
+}
+
+model User {
+  id            String     @id @default(uuid())
+  email         String     @unique
+  password      String
+  role          Role       @default(ATTENDEE)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  events        Event[]
+  organizedEvents Event[]  @relation("OrganizerEvents")
+}
+
+model Event {
+  id          String     @id @default(uuid())
+  title       String
+  description String
+  date        DateTime
+  location    String
+  category    String
+  organizer   User       @relation("OrganizerEvents", fields: [organizerId], references: [id])
+  organizerId String
+  attendees   User[]
+  qrCode      String?
+}
+
+enum Role {
+  ATTENDEE
+  ORGANIZER
+}

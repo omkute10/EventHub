@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      String   @default("ATTENDEE")
+  events    Event[]  @relation("OrganizedEvents")
+  ePasses   EPass[]
+  createdAt DateTime @default(now())
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  date        DateTime
+  location    String
+  organizer   User     @relation("OrganizedEvents", fields: [organizerId], references: [id])
+  organizerId String
+  ePasses     EPass[]
+}
+
+model EPass {
+  id      String @id @default(uuid())
+  event   Event  @relation(fields: [eventId], references: [id])
+  eventId String
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  qrCode  String
+}
+
+enum Role {
+  ATTENDEE
+  ORGANIZER
+} 
